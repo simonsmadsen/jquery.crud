@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="crud.js"></script>
+        <script>
+            $(document).ready(function() {
+                var crud_obj = new crud('test');
+                
+                crud_obj.create({
+                  name:'simon'
+                });
+            
+                var result = crud_obj.read('name','name = "simon"')
+                console.log(result[0].name);
+
+            })
+        </script>
+    </head>
+    <body>
+        
+        
+        
+    </body>
+</html>
