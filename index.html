@@ -9,11 +9,15 @@
             $(document).ready(function() {
                 var crud_obj = new crud('test');
                 
-                crud_obj.create({
-                  name:'simon'
-                });
+                 crud_obj.update({
+                  name:'ole'
+                 });
+                
+                crud_obj.update({
+                  name:'tarzan'
+                },'name="ole"');
             
-                var result = crud_obj.read('name','name = "simon"')
+                var result = crud_obj.read('name')
                 console.log(result[0].name);
 
             })

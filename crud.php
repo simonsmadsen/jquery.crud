@@ -15,7 +15,7 @@ $crud = new Crud($host,$dabase,$username,$password,$table);
         $crud->read($_POST['data']);
     }
     if($_POST['type'] === 'update'){
-        $crud->update($_POST['data']);
+        $crud->update($_POST['data'],$_POST['where']);
     }
     if($_POST['type'] === 'delete'){
         $crud->delete($_POST['data']);
@@ -67,8 +67,16 @@ class Crud{
         echo json_encode($result);
     }
    
-   public function update(){
-       
+   public function update($data,$where){
+        $keys = array();
+       foreach ($data as $key => $value){
+            $keys[] = $key.'="'.$value.'"';
+        }
+         
+        $sql = "UPDATE ".$this->table." SET ".implode(',', $keys)." ".$where;
+        echo $sql;
+        $sth = $this->DBH->prepare($sql);
+        $sth->execute();
    }
    
    public function delete(){

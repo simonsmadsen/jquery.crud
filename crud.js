@@ -54,8 +54,9 @@ function crud(table)
                 type:"POST",
                 url:this.crud,
                 async: false,
-                data:{type:'update',data:json_obj,where:where}
+                data:{type:'update',data:json_obj,where:where,table:this.table}
             }).done(function(data){
+                $('body').append(data)
                 return_data = data;
             })
     }
@@ -68,7 +69,7 @@ function crud(table)
                   type:"POST",
                   url:this.crud,
                   async: false,
-                  data:{type:'update',data:json_obj,where:where}
+                  data:{type:'update',data:where,where:where}
             }).done(function(data){
                   return data;
             })
