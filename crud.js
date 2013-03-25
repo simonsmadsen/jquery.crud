@@ -7,19 +7,21 @@ function crud(table)
     this.create = create;
     this.read = read;
     this.update = update;
-    this.delete = _delete;
+    this.remove = _delete;
     this.crud = crud_location+'crud.php';
     
     // Return false or last insert id
     function create(json_obj){
+        var _return;
         $.ajax({
             type:"POST",
             async: false,
             url:this.crud,
             data:{type:'create',data:json_obj,table:this.table}
         }).done(function(data){
-            return data;
+            _return = data;
         })
+        return _return;
     }
     
     // Return false or json obj
@@ -48,6 +50,7 @@ function crud(table)
     
     // return false or change id
     function update(json_obj,where){
+        var _return;
          where = (typeof where === "undefined") ? false : where;
          where = (where === false) ? '' : 'where '+where;
            $.ajax({
@@ -56,24 +59,25 @@ function crud(table)
                 async: false,
                 data:{type:'update',data:json_obj,where:where,table:this.table}
             }).done(function(data){
-                $('body').append(data)
-                return_data = data;
+                _return = data;
             })
+        return _return;
     }
     
     // return false or true
     function _delete(where){
+          var _return;
           where = (typeof where === "undefined") ? false : where;
           if(where !== false){
             $.ajax({
                   type:"POST",
                   url:this.crud,
                   async: false,
-                  data:{type:'update',data:where,where:where}
+                  data:{type:'delete',where:where,table:this.table}
             }).done(function(data){
-                  return data;
+                  _return = data;
             })
           }
-          return false;
+          return _return;
     }
 }

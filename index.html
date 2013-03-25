@@ -6,21 +6,31 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="crud.js"></script>
         <script>
-            $(document).ready(function() {
-                var crud_obj = new crud('test');
+        $(document).ready(function() {
+            
+                // make new instace of crud object with a tablename
+                var crud_users = new crud('users');
                 
-                 crud_obj.update({
-                  name:'ole'
-                 });
+                // Create user
+                crud_users.create({
+                  name:'ole',
+                  password:'pw123',
+                  rank:'1'
+                });
                 
-                crud_obj.update({
-                  name:'tarzan'
+                // Update user
+                crud_users.update({
+                  password:'pw1234'
                 },'name="ole"');
             
-                var result = crud_obj.read('name')
-                console.log(result[0].name);
-
-            })
+                // Remove user
+                crud_users.remove('name="ole"');
+                
+                // print user
+                var result = crud_users.read('name, password as pw')
+                alert( result[0].name+' '+result[0].pw );
+                
+         })
         </script>
     </head>
     <body>

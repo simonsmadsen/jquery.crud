@@ -18,7 +18,7 @@ $crud = new Crud($host,$dabase,$username,$password,$table);
         $crud->update($_POST['data'],$_POST['where']);
     }
     if($_POST['type'] === 'delete'){
-        $crud->delete($_POST['data']);
+        $crud->delete($_POST['where']);
     }
  
   
@@ -74,13 +74,17 @@ class Crud{
         }
          
         $sql = "UPDATE ".$this->table." SET ".implode(',', $keys)." ".$where;
-        echo $sql;
         $sth = $this->DBH->prepare($sql);
-        $sth->execute();
+        echo $sth->execute();
    }
    
-   public function delete(){
-       
+   public function delete($where){
+        $sql = 
+            "
+                DELETE FROM $this->table
+            WHERE ".$where;
+        $sth = $this->DBH->prepare($sql);
+        echo $sth->execute();  
    }
     
     
