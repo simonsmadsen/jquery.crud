@@ -39,9 +39,10 @@ function crud(table)
             type:"POST",
             url:this.crud,
             async: false,
-            data:{type:'read',data:'select '+column_names+' from '+this.table+' '+where+' '+order+' '+limit,table:this.table}
+            data:{type:'read',data:'select '+column_names+' from '+this.table+' '+where+' '+order+' '+limit,table:this.table},
+            dataType: "json"
         }).done(function(data){
-            _return = eval(data);
+            _return = data;
         })
         
         return _return;
